@@ -1,1 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>OrderlyMeds Trivia Challenge — v10 FULL</title>
+<style>
+:root{--mint:#CFE2DA;--coral:#F5A896;--navy:#19313B;--ink:#0f1f26;--muted:#47616B;--btn:#FCE5DE;--btn2:#F8D7CB;--ok:#22A06B;--err:#E25A4D;--card:#ffffff;--ring:rgba(25,49,59,.15)}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;color:var(--navy);
+background:radial-gradient(1000px 600px at 85% -10%, rgba(245,168,150,.25), transparent 60%),
+radial-gradient(800px 520px at -5% 110%, rgba(207,226,218,.35), transparent 60%),var(--mint);
+min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:20px}
+.app{width:min(1140px,100%);background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.85));
+border:1px solid var(--ring);border-radius:22px;overflow:hidden;box-shadow:0 12px 40px rgba(25,49,59,.12)}
+header{padding:18px 20px;background:linear-gradient(90deg, rgba(245,168,150,.25), rgba(255,255,255,.6));
+border-bottom:1px solid var(--ring);display:flex;gap:14px;align-items:center;justify-content:space-between}
+.brand{display:flex;gap:14px;align-items:center}.logo{width:54px;height:54px;border-radius:12px;background:#fff;display:grid;place-items:center;border:1px solid var(--ring);box-shadow:0 2px 8px rgba(25,49,59,.08) inset}
+h1{font-size:1.2rem;margin:0;color:var(--navy)}.sub{color:var(--muted);margin:2px 0 0;font-size:.95rem}
+footer.site{padding:12px 16px;color:var(--muted);text-align:center;border-top:1px solid var(--ring);font-size:.95rem}
+.content{padding:20px}.card{background:var(--card);border:1px solid var(--ring);border-radius:16px;padding:18px;box-shadow:0 6px 20px rgba(25,49,59,.06)}
+.row{display:flex;gap:14px;flex-wrap:wrap}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+button,select{appearance:none;cursor:pointer;background:var(--btn);color:var(--ink);border:1px solid var(--ring);border-radius:12px;padding:11px 13px;font-weight:700}
+button:hover{background:var(--btn2)}.accent{background:var(--coral);color:#13252C;border:0}.accent:hover{filter:brightness(.95)}
+.small{color:var(--muted);font-size:.92rem}.pill{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--ring);color:var(--navy);font-weight:700;border-radius:999px;padding:6px 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:10px}
+.chk{display:flex;gap:8px;align-items:flex-start;background:#fff;border:1px solid var(--ring);border-radius:12px;padding:10px}
+.chk input{margin-top:2px}.hidden{display:none}.status{display:flex;gap:10px;align-items:center;color:var(--muted)}
+.question{font-size:1.15rem;margin:.5rem 0}.answers{display:grid;gap:10px}
+.answer{background:#fff;border:1px solid var(--ring);border-radius:12px;padding:12px;text-align:left;font-weight:700}
+.answer:hover{background:#FAFAFA}.answer.correct{outline:2px solid var(--ok)}.answer.wrong{outline:2px solid var(--err)}
+.footer{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:12px}
+.progress{height:10px;border-radius:999px;background:#eef4f2;border:1px solid var(--ring);overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg, var(--coral), #FFD1C2);transition:width .35s}
+.center{text-align:center}kbd{background:#eef4f2;border:1px solid var(--ring);padding:2px 6px;border-radius:6px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--ring);background:#fff;font-weight:800;color:var(--navy)}
+.brand-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:16px;background:#fff;border:1px solid var(--ring)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo" aria-label="OrderlyMeds logo">
+        <svg width="40" height="40" viewBox="0 0 80 80" aria-hidden="true">
+          <path d="M40 8c-13 0-24 11-24 24s11 24 24 24 24-11 24-24S53 8 40 8zm0 10c7.7 0 14 6.3 14 14s-6.3 14-14 14-14-6.3-14-14 6.3-14 14-14z" fill="#F5A896"/>
+          <path d="M18 56V28h10v10c2.8-3.8 6.1-6 10.5-6 4.7 0 8.4 2.3 10.5 6 3-3.8 6.6-6 11.5-6 8 0 14 6 14 15v9H64v-8c0-3.8-2.5-6.5-6-6.5-3.7 0-6 2.9-6 7v7H42v-8c0-3.8-2.5-6.5-6-6.5-3.7 0-6 2.9-6 7v7H18z" fill="#19313B"/>
+          <path d="M66 62h4v-4h4v4h4v4h-4v4h-4v-4h-4z" fill="#F5A896"/>
+        </svg>
+      </div>
+      <div>
+        <h1>OrderlyMeds Trivia Challenge</h1>
+        <p class="sub">All categories • All questions • Brand-ready</p>
+      </div>
+    </div>
+    <div class="brand-badge">
+      <svg width="26" height="26" viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M40 8c-13 0-24 11-24 24s11 24 24 24 24-11 24-24S53 8 40 8zm0 10c7.7 0 14 6.3 14 14s-6.3 14-14 14-14-6.3-14-14 6.3-14 14-14z" fill="#F5A896"/>
+        <path d="M18 56V28h10v10c2.8-3.8 6.1-6 10.5-6 4.7 0 8.4 2.3 10.5 6 3-3.8 6.6-6 11.5-6 8 0 14 6 14 15v9H64v-8c0-3.8-2.5-6.5-6-6.5-3.7 0-6 2.9-6 7v7H42v-8c0-3.8-2.5-6.5-6-6.5-3.7 0-6 2.9-6 7v7H18z" fill="#19313B"/>
+        <path d="M66 62h4v-4h4v4h4v4h-4v4h-4v-4h-4z" fill="#F5A896"/>
+      </svg>
+      <strong style="color:var(--navy)">OM</strong>
+    </div>
+  </header>
+
+  <div class="content">
+    <div id="setup" class="card">
+      <h2>Choose Categories</h2>
+      <div class="grid" id="catGrid"></div>
+      <div class="small" id="selCount" style="margin-top:6px">Selected: 0 questions</div>
+      <div class="controls">
+        <label>Number of Questions:
+          <select id="numQ">
+            <option>10</option><option>15</option><option>25</option><option>30</option><option>40</option><option>60</option>
+            <option value="all" selected>All (0)</option>
+          </select>
+        </label>
+        <label>Shuffle:
+          <select id="doShuffle"><option value="yes" selected>Yes</option><option value="no">No</option></select>
+        </label>
+        <label>Timer per Question:
+          <select id="timerSel"><option value="off" selected>Off</option><option value="15">15s</option><option value="30">30s</option><option value="45">45s</option></select>
+        </label>
+        <label class="pill"><input type="checkbox" id="csPractice"> CS Practice Mode <span title="Uses only the CS category for this run.">ⓘ</span></label>
+        <button id="startBtn" class="accent">Start Challenge</button>
+      </div>
+      <p class="small">Shortcuts: <kbd>1–4</kbd> to answer, <kbd>N</kbd> next, <kbd>R</kbd> reveal.</p>
+      <span class="pill">Included Topics</span>
+      <ul class="small" id="topicList"></ul>
+    </div>
+
+    <div id="game" class="card hidden">
+      <div class="status">
+        <span class="badge" id="catBadge">Category</span>
+        <span id="csModeBadge" class="pill hidden" style="margin-left:6px">CS Mode</span>
+        <span>•</span><span><strong id="qIdx">1</strong>/<span id="qTotal">0</span></span>
+        <span>•</span><span>Score: <strong id="score">0</strong></span>
+        <span id="timerWrap" class="pill hidden">⏱ <span id="timeLeft"></span></span>
+      </div>
+      <h3 id="question" class="question">Question text</h3>
+      <div id="answers" class="answers"></div>
+      <div class="footer">
+        <div><button id="nextBtn">Next ▶</button><button id="revealBtn">Reveal</button></div>
+        <div class="progress" style="flex:1"><div id="bar" class="bar"></div></div>
+      </div>
+    </div>
+
+    <div id="result" class="card hidden center">
+      <h2>Challenge Complete! 🎉</h2>
+      <p>You scored <strong id="finalScore">0</strong>/<span id="finalTotal">0</span></p>
+      <p class="small" id="gradeMsg"></p>
+      <div class="brand-badge" style="margin:12px auto; width:max-content">
+        <svg width="26" height="26" viewBox="0 0 80 80" aria-hidden="true">
+          <path d="M40 8c-13 0-24 11-24 24s11 24 24 24 24-11 24-24S53 8 40 8zm0 10c7.7 0 14 6.3 14 14s-6.3 14-14 14-14-6.3-14-14 6.3-14 14-14z" fill="#F5A896"/>
+          <path d="M18 56V28h10v10c2.8-3.8 6.1-6 10.5-6 4.7 0 8.4 2.3 10.5 6 3-3.8 6.6-6 11.5-6 8 0 14 6 14 15v9H64v-8c0-3.8-2.5-6.5-6-6.5-3.7 0-6 2.9-6 7v7H42v-8c0-3.8-2.5-6.5-6-6.5-3.7 0-6 2.9-6 7v7H18z" fill="#19313B"/>
+          <path d="M66 62h4v-4h4v4h4v4h-4v4h-4v-4h-4z" fill="#F5A896"/>
+        </svg>
+        <strong style="color:var(--navy)">OrderlyMeds</strong>
+      </div>
+      <div class="controls" style="justify-content:center">
+        <button id="playAgain" class="accent">Restart Challenge</button>
+        <button id="csvBtn">Download Results (CSV)</button>
+      </div>
+    </div>
+  </div>
+  <footer class="site">Empowering patients through accessible, affordable care — orderlymeds.com</footer>
+</div>
+
+<script>
+const Q=(q,a,c)=>({q,a,c});
+
+// ---------- Category data (condensed selection; more than 80 Q total) ----------
+const CAT_CS=[
+  Q("Maximum time a call may remain on hold without checking back in?",["30 seconds","60 seconds","90 seconds","120 seconds"],1),
+  Q("When checking back on a hold, what should the agent do?",["Stay silent","Say: \\"I'm still here, give me a bit longer\\"","Transfer the call","End the call if busy"],1),
+  Q("Are compounded medications FDA approved?",["Yes","No — they are not FDA approved","Only GLP-1/GIP are approved","Only at certain pharmacies"],1),
+  Q("Agents should place calls/texts from which number?",["Personal line","Office main line","1-866-971-5161 (the 5161 number)","Any available number"],2),
+  Q("When is it acceptable to promise a return call?",["Any time","Only if you will personally make the call","When a manager is available","Never promise"],1),
+  Q("Which of the following is NOT on the current Betterfinco access list?",["Massachusetts","North Carolina","Nebraska","California"],3),
+  Q("Where do we meet for 1:1s every Wednesday?",["Zoom","Teams","Whereby","Meet"],2),
+  Q("PerfectRx current BUD is:",["180 days","300 days","365 days","Indefinite"],2),
+  Q("All ProRx medications now have a BUD of how many days?",["180 days","300 days","365 days","Indefinite"],2),
+  Q("The Beyond Use Date (BUD) is counted from which date?",["Shipment date","Date of prescription","From the date of compound","First use date"],2),
+  Q("What should credits notes include?",["Short description only","Detailed issues/reason; referral name & email when applicable","Just ticket ID","Agent initials only"],1),
+  Q("Sticker not received — where should the patient check?",["Top of vial only","Bottom of vial only","Top & bottom of vial, and the letter in shipment","Auto reship"],2),
+  Q("Escalation accountability timing for buckets / Daily Fires?",["24h / 24h","48h / 48h","72h / 48h","48h / 72h"],1),
+  Q("'Invalid Script' status means:",["Insufficient funds","Denied/error; escalate to Not at Medical","On hold for refill","Shipped incorrectly"],1),
+  Q("Can you create a Linear ticket as a Tier One agent?",["Yes","No — only Tier Two and managers","Only with approval","Only for refunds"],1),
+  Q("All interactions escalated to the SF bucket must have a Linear ticket?",["Optional","Yes—otherwise use the \\"No Linear Ticket\\" bucket","Only for pharmacy issues","Only for refunds"],1),
+  Q("If there is no Linear ticket for an SF escalation, which bucket is used?",["Refunds","No Linear Ticket","Daily Fires","Manager"],1),
+  Q("How do you check for a Linear ticket?",["Search the email in Slack","Ask a manager","Check UPS tracking","Search phone number in CRM"],0),
+  Q("Which snippet contains the BUD letter?",["Snippet 21","Snippet 58","Snippet 75","Snippet 99"],1),
+  Q("When do we send the BUD letter?",["After refund is approved","First — before rebuttals about refunds etc.","Only if the patient asks","Never send it"],1),
+  Q("When do we address a refund issue?",["Immediately if upset","Only after the customer specifically asks","After the package ships","At end of every call"],1),
+  Q("Customer asks for a refund — what do we do?",["Promise a refund today","No promises — escalate to the Refund team to review","Offer loyalty credit instead","Close the ticket"],1),
+  Q("Customer asks to restore loyalty — what do we say?",["We will restore it","We will escalate to the Loyalty team (no promises)","We cannot do that","Email support"],1),
+  Q("Medical team dropped the ball/made a mistake — action?",["Post in random","Use the Excel tracker to log it","DM the provider","Ignore unless patient complains"],1),
+  Q("Should we DM people about cases we are working on?",["Yes, to move faster","No — use the channel; DMs only for pleasantries","DM only managers","DM pharmacy directly"],1),
+  Q("Should you internal comment or DM someone for a follow-up?",["Internal comment immediately","DM for follow-up ONLY — and only after 48 hours","Either is fine","Open a new ticket instead"],1)
+];
+
+const CAT_PRICING=[
+  Q("Most popular GLP-1 injectable price (3‑month starter, per month)?",["$83","$99","$149","$199"],0),
+  Q("Most popular GLP-1 price month-to-month?",["$83","$149","$199","$249"],2),
+  Q("Other GLP-1 injections (3‑month program) per month?",["$83","$99","$166","$199"],2),
+  Q("Other GLP-1 injections month-to-month price?",["$249","$399","$299","$166"],1),
+  Q("Wegovy month-to-month price?",["$1,839","$1,498","$999","$2,100"],0),
+  Q("Zepbound month-to-month price?",["$1,498","$1,839","$1,299","$999"],0),
+  Q("What is included in the price?",["Doctor visit, medication, syringes, shipping","Medication only","Doctor visit only","Shipping only"],0),
+  Q("Any membership fees or hidden costs?",["Yes","No—what you see is what you pay","Only for higher doses","Only for first month"],1),
+  Q("Do you accept HSA/FSA?",["No","Yes—HSA and FSA accepted","Only HSA","Only FSA"],1),
+  Q("Do you accept insurance?",["Yes","No—insurance not accepted","Only PPO","Only HMO"],1),
+  Q("Do prices increase with higher doses?",["Never","Only on extended BUD compounded GLP-1/GIP and GLP-1","Always","Only brand meds"],1),
+  Q("Compounded GLP-1/GIP higher dose surcharge?",["$10","$20","$50","$100"],2),
+  Q("Compounded GLP-1 higher dose surcharge?",["$20","$50","$10","$0"],0),
+  Q("CareCredit cards accepted?",["Yes","No","Only for brand meds","Only during promos"],1),
+  Q("Payment plan offered?",["Yes—12 months","No—pay month-to-month per order","Only with HSA","Only brand meds"],1)
+];
+
+const CAT_PHARM=[
+  Q("Pharmacy partners for compounding include:",["PerfectRx/PerfectionRx and ProRx","CVS and Walgreens","Costco and RiteAid","None—brand only"],0),
+  Q("Pharmacies are designated:",["503B","503A","Both 503A and 503B","Unregulated"],1),
+  Q("503A pharmacies are regulated by:",["Only FDA","State boards and FDA; must follow USP, FDCA sections","Only state boards","Only USP"],1),
+  Q("Are compounded GLP-1 / GLP-1/GIP FDA approved?",["Yes","No—they are not FDA approved","Only GLP-1 are","Only GLP-1/GIP are"],1),
+  Q("Extended BUD stability confirmed up to:",["180 days","300 days","365 days","90 days"],2),
+  Q("BUD dates are established by:",["Arbitrary decision","USP defaults or validated stability studies","Pharmacist discretion only","Insurance rules"],1),
+  Q("BUD counted from:",["Shipment date","Prescription date","Date of compound","First use"],2),
+  Q("Brand meds available include:",["Zepbound and Wegovy","Ozempic only","No brands","Mounjaro only"],0),
+  Q("Pricing across most doses is:",["Higher at higher doses","Same price for all doses except noted compounded surcharges","Cheaper at higher doses","Only brand varies"],1),
+  Q("All ProRx medications BUD now:",["180 days","300 days","365 days","No BUD"],2)
+];
+
+const CAT_ORDERS=[
+  Q("Approval time for prescription (typical):",["Same hour","24–48 hours","7 days","Instant"],1),
+  Q("Pharmacy ships in:",["2–3 days after approval","Same day","7–10 days","After delivery manager app install"],0),
+  Q("Total time to receive your medication:",["1–3 business days","8–10 business days","3–4 weeks","Same day"],1),
+  Q("Can orders be expedited?",["Yes","No—cannot expedite","Only brand meds","Only if HSA"],1),
+  Q("Refund policy before prescription is finalized:",["No refunds","Full refund if denied; can cancel before written","Refunds only after shipping","Always refunded"],1),
+  Q("Refund processing time to bank:",["Same day","3–5 business days","10–14 days","Varies monthly"],1),
+  Q("Multiple months shipped?",["No","Yes—multi‑month options available","Only brand","Only with approval"],1),
+  Q("Extra syringes if lost/damaged:",["Provided free overnight","Buy at local pharmacy/online","Not available","Only with manager"],1),
+  Q("Lost/stolen package process:",["Email pharmacy","Open claim with carrier and send claim ID to us","Wait 30 days","Contact prescriber"],1),
+  Q("Tracking updates via:",["We don’t provide tracking","UPS/FedEx Delivery Manager app & email when available","Postal mail","Portal only"],1),
+  Q("Medication got warm in shipping:",["It’s ruined","Stable ≥72 hours up to ~104°F; refrigerate on arrival","Return immediately","Use ice only"],1)
+];
+
+const CAT_PROGRAM=[
+  Q("Brand treatments offered:",["Zepbound (tirzepatide) and Wegovy (semaglutide)","Ozempic only","No brands","Mounjaro only"],0),
+  Q("Program price includes:",["Doctor, medication, syringes, shipping","Medication only","Doctor only","Shipping only"],0),
+  Q("Signup flow first step:",["Pay then leave","Quick online eligibility form","Video call first","Pharmacy call"],1),
+  Q("Who may need live video visit (examples):",["Everyone","Only MI/LA/NM/Kansas/RI/WV per state rules","Only California","Only Florida"],1),
+  Q("Eligibility basics include:",["Any age","18+, BMI > 25, not pregnant, no excluded conditions, medical need for compounding","Pregnancy required","BMI < 20"],1),
+  Q("Refill process:",["Automatic upsizing","Check-in prompt; choose stay/increase; provider reviews; pharmacy ships","No check-ins","Customer self-compounds"],1),
+  Q("Provider contact timing:",["Instantly","Within ~24–48 hours after health screen completed","After shipping only","Never"],1),
+  Q("Bloodwork required to start?",["Yes for all","No; may be recommended in some cases","Only with brand meds","Only with HSA"],1),
+  Q("GLP-1 mechanism includes:",["Lower insulin","Mimics GLP-1; increases insulin; reduces appetite; increases fullness","Raises sugar","Unknown"],1),
+  Q("Compounded GLP-1/GIP FDA approval status:",["Approved","Not FDA approved","Only semaglutide approved","Only tirzepatide approved"],1),
+  Q("Expected average weight loss in trials (paired with lifestyle):",["2–3%","15–20% over ~1 year","50%","Unknown"],1),
+  Q("Why pay before approval/shipping?",["To reserve queue only","Streamlines screening like a copay; fully refundable if ineligible","Non-refundable deposit","To tip carrier"],1)
+];
+
+const CAT_ABOUT=[
+  Q("Legitimacy proof:",["Only social media","LegitScript certification + badge on site; Facebook community","BBB only","None"],1),
+  Q("How does OM save time/money?",["In-person only","Telehealth + transparent pricing; meds shipped home","Insurance-only clinic","Hidden fees apply"],1),
+  Q("Is it a subscription service?",["Yes—annual","No—monthly purchase; no hidden fees","Only with brand meds","Only with compounded meds"],1),
+  Q("Mental health support includes:",["None","1 free month of BetterHelp for customers","Only crisis line","Paid add-on only"],1),
+  Q("Fitness/nutrition support includes:",["None","Free access to app with coaching and tracking","Gym membership","Only printed guide"],1),
+  Q("Consultation style for most states:",["Live video only","Patient portal chat with provider","Phone calls only","In-person only"],1),
+  Q("States that require live video (examples):",["LA, MS, NM, KS, RI, WV","CA, NV, AZ","NY, NJ","AK, HI"],0),
+  Q("Providers licensed/board-certified?",["No","Yes—in all states with clinical oversight; LegitScript-certified network","Only some states","Only contractors"],1),
+  Q("How quickly is treatment prescribed?",["Minutes always","Within ~48 hours after complete health screen (typical)","Weeks","Only after UPS scans"],1),
+  Q("Where to access secure Med Chat?",["Email","patient.orderlymeds.com","Public chat","SMS"],1)
+];
+
+const CAT_TECH=[
+  Q("Which platform does NOT have an app?",["Both platforms have an app","Android only","Apple only","Neither has apps"],0),
+  Q("Correct outbound number to use:",["Any number","Personal line","1-866-971-5161 (5161)","Local DID"],2),
+  Q("If Android users aren’t receiving texts, best first step:",["Text 'hello' to 1-866-971-5161 and mark not spam","Reinstall OS","Change carrier","Email pharmacy"],0),
+  Q("Secure Med Chat link:",["patient.orderlymeds.com","facebook.com","apple.com","play.google.com"],0),
+  Q("Suggest app downloads for:",["iOS only","Android only","Both Android and Apple","Neither"],2),
+  Q("For follow-ups, internal comment or DM?",["Internal comment immediately","DM for follow-up ONLY after 48h","Either is fine","Open a new ticket"],1),
+  Q("Hold-time reminder window:",["60 seconds to check back","3 minutes","10 minutes","No rule"],0),
+  Q("Escalations to SF need:",["Nothing","Linear ticket","Hashtag only","Manager ping only"],1)
+];
+
+const CATS={
+  "Customer Support (CS Policies)":CAT_CS,
+  "Pricing & Payments":CAT_PRICING,
+  "Pharmacies & Compounding":CAT_PHARM,
+  "Orders & Shipping":CAT_ORDERS,
+  "Program & Eligibility":CAT_PROGRAM,
+  "About & Telehealth":CAT_ABOUT,
+  "Account & Tech Support":CAT_TECH
+};
+
+// UI build
+const catGrid=document.getElementById('catGrid');
+Object.keys(CATS).forEach(name=>{
+  const div=document.createElement('label'); div.className='chk';
+  div.innerHTML=`<input type="checkbox" data-cat="${name}" checked>
+    <div><div style="font-weight:800">${name}</div><div class="small">${CATS[name].length} questions</div></div>`;
+  catGrid.appendChild(div);
+  div.querySelector('input[type=checkbox]').addEventListener('change', updateSelectedCount);
+});
+const topicList=document.getElementById('topicList');
+Object.keys(CATS).forEach(name=>{ const li=document.createElement('li'); li.textContent=name; topicList.appendChild(li); });
+
+function isCSMode(){ return document.getElementById('csPractice')?.checked; }
+function setCatGridDisabled(disabled){ [...catGrid.querySelectorAll('input[type=checkbox]')].forEach(cb=> cb.disabled=disabled); }
+document.getElementById('csPractice').addEventListener('change', ()=>{
+  const csBadgeEl=document.getElementById('csModeBadge');
+  if(csBadgeEl){ csBadgeEl.classList[isCSMode()?'remove':'add']('hidden'); }
+  if(isCSMode()){ setCatGridDisabled(true); } else { setCatGridDisabled(false); }
+  updateSelectedCount();
+});
+
+function updateSelectedCount(){
+  if(isCSMode()){
+    const total=(CATS["Customer Support (CS Policies)"]?.length||0);
+    const el=document.getElementById('selCount');
+    if(el){ el.textContent=`Selected: ${total} question${total===1?'':'s'} (CS Practice)`; }
+    const allOpt=document.querySelector('#numQ option[value="all"]');
+    if(allOpt){ allOpt.textContent=`All (${total})`; }
+    return;
+  }
+  const checked=[...catGrid.querySelectorAll('input[type=checkbox]:checked')].map(i=>i.dataset.cat);
+  let total=0; checked.forEach(cat=> total+=(CATS[cat]?.length||0));
+  const el=document.getElementById('selCount');
+  if(el){ el.textContent=`Selected: ${total} question${total===1?'':'s'}`; }
+  const allOpt=document.querySelector('#numQ option[value="all"]');
+  if(allOpt){ allOpt.textContent=`All (${total})`; }
+}
+updateSelectedCount();
+
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+let round=[],idx=0,score=0,answered=false,timer=null,timeLeft=0;
+const setup=document.getElementById('setup'),game=document.getElementById('game'),result=document.getElementById('result');
+const qIdxEl=document.getElementById('qIdx'),qTotalEl=document.getElementById('qTotal'),scoreEl=document.getElementById('score');
+const questionEl=document.getElementById('question'),answersEl=document.getElementById('answers'),bar=document.getElementById('bar');
+const timerWrap=document.getElementById('timerWrap'),timeLeftEl=document.getElementById('timeLeft'),catBadge=document.getElementById('catBadge'];
+
+function startTimer(sel){
+  if(sel==='off'){timerWrap.classList.add('hidden');return;}
+  timerWrap.classList.remove('hidden'); timeLeft=parseInt(sel,10); timeLeftEl.textContent=timeLeft+"s";
+  timer=setInterval(()=>{timeLeft--; timeLeftEl.textContent=timeLeft+"s"; if(timeLeft<=0){clearInterval(timer); timer=null; reveal();}},1000);
+}
+function stopTimer(){if(timer){clearInterval(timer); timer=null;}}
+
+function buildRound(){
+  if(isCSMode()){
+    const bank=(CATS["Customer Support (CS Policies)"]||[]).map(q=>({...q,__cat:"Customer Support (CS Policies)"}));
+    const doShuffle=document.getElementById('doShuffle').value==='yes'; if(doShuffle) shuffle(bank);
+    const sel=document.getElementById('numQ').value; const n= sel==='all'? bank.length : parseInt(sel,10);
+    round=bank.slice(0, Math.min(n, bank.length)); return;
+  }
+  const checked=[...catGrid.querySelectorAll('input[type=checkbox]:checked')].map(i=>i.dataset.cat);
+  let bank=[]; checked.forEach(cat=>{ CATS[cat].forEach(q=> bank.push({...q,__cat:cat})); });
+  const doShuffle=document.getElementById('doShuffle').value==='yes'; if(doShuffle) shuffle(bank);
+  const sel=document.getElementById('numQ').value; const n= sel==='all'? bank.length : parseInt(sel,10);
+  round=bank.slice(0, Math.min(n, bank.length));
+}
+
+function render(){
+  const q=round[idx]; catBadge.textContent=q.__cat;
+  const csBadgeEl=document.getElementById('csModeBadge'); if(csBadgeEl){ csBadgeEl.classList[isCSMode()?'remove':'add']('hidden'); }
+  qIdxEl.textContent=idx+1; qTotalEl.textContent=round.length; scoreEl.textContent=score;
+  bar.style.width=(idx/round.length*100).toFixed(1)+'%';
+  questionEl.textContent=q.q; answersEl.innerHTML="";
+  const opts=q.a.map((t,i)=>({t,i})); shuffle(opts);
+  opts.forEach(({t,i})=>{const b=document.createElement('button'); b.className='answer'; b.textContent=t; b.onclick=()=>select(i,b); answersEl.appendChild(b);});
+  answered=false;
+}
+
+function select(choice,btn){
+  if(answered) return; answered=true; stopTimer();
+  const q=round[idx];
+  [...answersEl.children].forEach(b=>{
+    const originalIndex=q.a.indexOf(b.textContent);
+    if(originalIndex===q.c) b.classList.add('correct');
+    if(b===btn && originalIndex!==q.c) b.classList.add('wrong');
+  });
+  if(q.a.indexOf(btn.textContent)===q.c){score++; scoreEl.textContent=score;}
+}
+
+function reveal(){
+  if(answered) return; answered=true; stopTimer();
+  const q=round[idx];
+  [...answersEl.children].forEach(b=>{ if(q.a.indexOf(b.textContent)===q.c) b.classList.add('correct'); });
+}
+
+function next(){
+  if(idx<round.length-1){ idx++; render(); startTimer(document.getElementById('timerSel').value); }
+  else end();
+}
+
+function end(){
+  setup.classList.add('hidden'); game.classList.add('hidden'); result.classList.remove('hidden');
+  document.getElementById('finalScore').textContent=score; document.getElementById('finalTotal').textContent=round.length;
+  const pct=Math.round(score/round.length*100);
+  document.getElementById('gradeMsg').textContent=`Accuracy ${pct}%. ${pct>=90?"⭐ Outstanding!":pct>=75?"👏 Great job!":pct>=60?"👍 Solid effort":"📘 Review & retry."}`;
+  bar.style.width='100%';
+}
+
+// Wiring
+document.getElementById('startBtn').onclick=()=>{
+  buildRound(); if(round.length===0){alert("Select at least one category."); return;}
+  idx=0; score=0; setup.classList.add('hidden'); result.classList.add('hidden'); game.classList.remove('hidden');
+  render(); startTimer(document.getElementById('timerSel').value);
+};
+document.getElementById('nextBtn').onclick=next;
+document.getElementById('revealBtn').onclick=reveal;
+document.getElementById('playAgain').onclick=()=>{ game.classList.add('hidden'); result.classList.add('hidden'); setup.classList.remove('hidden'); };
+
+// CSV export
+document.getElementById('csvBtn').onclick=()=>{
+  const rows=[["Score","Total","Percent","Timestamp"],[score,round.length,Math.round(score/round.length*100)+"%", new Date().toISOString()]];
+  const csv=rows.map(r=>r.join(",")).join("\n");
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='om_trivia_results.csv'; a.click(); URL.revokeObjectURL(url);
+};
+
+// Keyboard shortcuts
+window.addEventListener('keydown',(e)=>{
+  if(!game || game.classList.contains('hidden')) return;
+  if(['1','2','3','4'].includes(e.key)){ const i=parseInt(e.key,10)-1; const b=[...answersEl.children][i]; if(b) b.click(); }
+  else if(e.key.toLowerCase()==='n'){ next(); }
+  else if(e.key.toLowerCase()==='r'){ reveal(); }
+});
+</script>
+</body>
+</html>
 
